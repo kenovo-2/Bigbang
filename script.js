@@ -1,33 +1,27 @@
-const dashboard = document.getElementById('dashboard');
-const videoContainer = document.getElementById('video-container');
-const videoTitle = document.getElementById('video-title');
-const videoPlayer = document.getElementById('video-player');
+const dashboard = document.getElementById("dashboard");
+const videoPlayer = document.getElementById("video-player");
+const videoSource = document.getElementById("video-source");
+const videoTitle = document.getElementById("video-title");
 
-// Display video dashboard
 videos.forEach((video, index) => {
-    const item = document.createElement('div');
-    item.className = 'video-item';
-    item.textContent = video.title;
-    item.onclick = () => loadVideo(index);
-    dashboard.appendChild(item);
+  const btn = document.createElement("button");
+  btn.textContent = video.title;
+  btn.onclick = () => {
+    videoSource.src = video.url;
+    videoPlayer.load();
+    videoTitle.textContent = video.title;
+  };
+  dashboard.appendChild(btn);
 });
 
-function loadVideo(index) {
-    const selectedVideo = videos[index];
-    videoTitle.textContent = selectedVideo.title;
-    videoPlayer.querySelector('source').src = selectedVideo.link;
-    videoPlayer.load();
-    videoContainer.style.display = 'block';
-}
-
 function playVideo() {
-    videoPlayer.play();
+  videoPlayer.play();
 }
 
 function pauseVideo() {
-    videoPlayer.pause();
+  videoPlayer.pause();
 }
 
 function skip(seconds) {
-    videoPlayer.currentTime += seconds;
+  videoPlayer.currentTime += seconds;
 }
